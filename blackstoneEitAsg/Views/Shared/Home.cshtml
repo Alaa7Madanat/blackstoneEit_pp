@@ -1,0 +1,259 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Management</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background-image: url(smart-robotics.png);
+            background-size: cover;
+            margin: 0;
+        }
+
+        .Navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f4f4;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            margin-top: 80px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .Logo-top-container {
+            background-color: #f8f4f4;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            width: auto;
+            height: auto;
+        }
+
+        h2 {
+            margin: 0;
+            margin-left: 550px;
+            color: #333;
+            font-family: 'Verdana', sans-serif;
+        }
+
+        .Logout button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="text"], button {
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f8f8f8;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-bottom: 2px solid #ddd;
+        }
+
+        td {
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr {
+            background-color: #DCDCDC;
+        }
+
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+        tr {
+        }
+
+            tr:hover {
+                background-color: #e6f7ff;
+            }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin-left: 599px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+            button:hover {
+                background-color: #0056b3;
+            }
+
+    </style>
+</head>
+<body>
+    <div class="Navbar">
+        <div class="Logo-top-container">
+            <img class="logo-img" src="logo2.png" alt="logo">
+        </div>
+        <h2>Employee Management</h2>
+        <div class="Logout">
+            <button>Logout</button>
+        </div>
+    </div>
+    <div class="container">
+        <input type="text" id="searchInput" placeholder="Search by First Name...">
+        <a href="test2.html"><button id="addEmployeeBtn">Add Employee</button></a>
+        <table id="employeeTable">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Middle Name</th>
+                    <th>Last Name</th>
+                    <th>Nationality</th>
+                    <th>Date of Birth</th>
+                    <th>Position</th>
+                    <th>Salary (USD$)</th>
+                    <th>Actions</th> <!-- New column for delete and edit icons -->
+                </tr>
+            </thead>
+            <tbody id="employeeList">
+                <!-- Employee rows will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+    <!-- Your existing scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var employees = [
+                {
+                    firstName: "John",
+                    middleName: "Doe",
+                    lastName: "Smith",
+                    nationality: "American",
+                    dob: "1990-01-01",
+                    position: "Software Engineer",
+                    salary: 60000
+                },
+                {
+                    firstName: "Jane",
+                    middleName: "Alice",
+                    lastName: "Doe",
+                    nationality: "British",
+                    dob: "1985-05-15",
+                    position: "HR Manager",
+                    salary: 70000
+                },
+                {
+                    firstName: "Michael",
+                    middleName: "James",
+                    lastName: "Johnson",
+                    nationality: "Canadian",
+                    dob: "1988-08-20",
+                    position: "Project Manager",
+                    salary: 80000
+                },
+                {
+                    firstName: "Emily",
+                    middleName: "Grace",
+                    lastName: "Brown",
+                    nationality: "Australian",
+                    dob: "1992-03-10",
+                    position: "Marketing Specialist",
+                    salary: 65000
+                },
+                {
+                    firstName: "David",
+                    middleName: "Robert",
+                    lastName: "Wilson",
+                    nationality: "American",
+                    dob: "1980-11-05",
+                    position: "Financial Analyst",
+                    salary: 75000
+                },
+                {
+                    firstName: "Emma",
+                    middleName: "Rose",
+                    lastName: "Taylor",
+                    nationality: "British",
+                    dob: "1987-09-25",
+                    position: "Graphic Designer",
+                    salary: 62000
+                },
+
+
+            ];
+            function populateTable(employeeData) {
+                $("#employeeList").empty(); // Clear existing rows
+                employeeData.forEach(function (employee) {
+                    // Add a delete and edit icon in the last column
+                    $("#employeeList").append(`<tr><td>${employee.firstName}</td><td>${employee.middleName}</td><td>${employee.lastName}</td><td>${employee.nationality}</td><td>${employee.dob}</td><td>${employee.position}</td><td>${employee.salary}</td><td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td></tr>`);
+                });
+            }
+
+            // Initial population of the table
+            populateTable(employees);
+
+            // Search functionality
+            $("#searchInput").on("input", function () {
+                var searchText = $(this).val().toLowerCase();
+                var filteredEmployees = employees.filter(function (employee) {
+                    return employee.firstName.toLowerCase().includes(searchText);
+                });
+                populateTable(filteredEmployees);
+            });
+
+            populateTable(employees);
+
+            // Search functionality
+            $("#searchInput").on("input", function () {
+                var searchText = $(this).val().toLowerCase();
+                var filteredEmployees = employees.filter(function (employee) {
+                    return employee.firstName.toLowerCase().includes(searchText);
+                });
+                populateTable(filteredEmployees);
+            });
+
+            // Add employee button functionality (dummy)
+            $("#addEmployeeBtn").click(function () {
+
+                populateTable(employees);
+            });
+        });
+    </script>
+</body>
+</html>

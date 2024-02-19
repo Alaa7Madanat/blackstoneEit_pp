@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_Layout";
+}
+
+    <div class="main">
+        <div class="form-box">
+            <div class="form-value">
+                <img src="~/img/Blackstonelogo.png" class="logo">
+
+                 <form class="login" method="post" asp-controller="login" asp-action="Login">
+                <div class="inputbox">
+                    <ion-icon name="person-outline"></ion-icon>
+                    <input type="text" name="Username" id="Admin" required> <label for="">Admin Username</label>
+                </div>
+                <div class="inputbox">
+                    <ion-icon id="togglePassword" name="lock-closed-outline" onclick="Toggle()"></ion-icon>
+                    <input type="password" autocomplete="current-password" name="Password" id="pass_log_id" required> <label for="">Password</label>
+                    <i class="fa-solid fa-eye-slash" id="togglePassword"></i>
+                </div>
+
+                     <button type="submit">Sign in</button>
+                     @if (ViewBag.WrongPassword != null)
+                     {
+                         <div>
+                             @ViewBag.WrongPassword
+                         </div>
+                     }
+                     <div class="register">
+                    Don't have a account <a  asp-controller="Home" asp-action="Signup">Register</a>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!------------------the Javascript code------------------>
+    <script>
+        // Change the type of input to password or text
+        function Toggle() {
+            var temp = document.getElementById("pass_log_id");
+            if (temp.type === "password") {
+                temp.type = "text";
+                document.getElementById("togglePassword").name = "lock-open-outline";
+            }
+            else {
+                temp.type = "password";
+                document.getElementById("togglePassword").name = "lock-closed-outline";
+            }
+        }
+    </script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
