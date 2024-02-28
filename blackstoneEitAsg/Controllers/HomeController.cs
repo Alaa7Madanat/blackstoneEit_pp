@@ -14,15 +14,7 @@ namespace blackstoneEitAsg.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Signup()
-        {
-            return View();
-        }
+  
 
         public IActionResult Home()
         {
@@ -42,8 +34,8 @@ namespace blackstoneEitAsg.Controllers
 
             return RedirectToAction("Home");
         }
+  
 
-     
 
         public IActionResult Search(string query)
         {

@@ -2,13 +2,14 @@
 using blackstoneEitAsg.Data;
 using blackstoneEitAsg.Models;
 
+
 namespace blackstoneEitAsg.Controllers
 {
-    public class loginController : Controller
+    public class LoginController : Controller
     {
         private readonly Empinfo _context;
 
-        public loginController(Empinfo context)
+        public LoginController(Empinfo context)
         {
             _context = context;
         }
@@ -16,7 +17,7 @@ namespace blackstoneEitAsg.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            return View("~/Views/Home/Index.cshtml");
+            return View();
         }
 
         [HttpPost]
@@ -32,7 +33,7 @@ namespace blackstoneEitAsg.Controllers
                 return RedirectToAction("Home", "Home");
             }
             ViewBag.WrongPassword = "The password is wrong";
-            return View("~/Views/Home/Index.cshtml");
+            return View();
         }
     }
 }

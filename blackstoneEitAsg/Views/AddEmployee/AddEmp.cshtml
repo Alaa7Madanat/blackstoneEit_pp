@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    ViewData["Title"] = "Add Employee";
+    Layout = "_Layout";
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,64 +17,7 @@
             background-size: cover;
         }
 
-        .Navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #f8f4f4;
-            padding: 10px;
-        }
-
-        .Logo-top-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo-img {
-            width: auto;
-            height: auto;
-        }
-
-        .Center {
-            flex-grow: 1;
-            text-align: center;
-        }
-
-        .Right {
-            display: flex;
-        }
-
-        .Home button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-left: 0px;
-        }
-
-        .Logout button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-left: 3px;
-        }
-
-            .Home button:hover,
-            .Logout button:hover {
-                background-color: #0056b3;
-            }
-
-        h1 {
-            margin: 0;
-            margin-left: 130px;
-            color: #333;
-            font-family: 'Verdana', sans-serif;
-        }
+       
 
 
         input[type="text"], button {
@@ -131,22 +78,6 @@
     </style>
 </head>
 <body>
-    <div class="Navbar">
-        <div class="Logo-top-container">
-            <img class="logo-img" src="~/img/logo.png" alt="logo">
-        </div>
-        <div class="Center">
-            <h1>Employee Management</h1>
-        </div>
-        <div class="Right">
-            <div class="Home">
-               <a asp-controller="Home" asp-action="Home"><button>Home</button></a>
-            </div>
-            <div class="Logout">
-                <a asp-controller="Home" asp-action="index" ><button>Logout</button></a>
-            </div>
-        </div>
-    </div>
 
     <div class="container">
         <h2>Add Employee Information</h2>
@@ -286,7 +217,7 @@
                 </select>
 
 
-              
+
             </div>
             <div class="form-group">
                 <label for="dob">Date of Birth:</label>
@@ -305,5 +236,5 @@
     </div>
 
 </body>
-@RenderBody()
+
 </html>

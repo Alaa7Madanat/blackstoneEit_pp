@@ -16,24 +16,16 @@ namespace blackstoneEitAsg.Controllers
         [HttpGet]
         public IActionResult AddEmp()
         {
-            return View("~/Views/Home/AddEmp.cshtml");
+            return View();
         }
 
         [HttpPost]
         public IActionResult Add(Employee model)
         {
-            var employee = new Employee
-            {
-                FirstName = model.FirstName,
-                MiddleName = model.MiddleName,
-                LastName = model.LastName,
-                Nationality = model.Nationality,
-                DateOfBirth = model.DateOfBirth,
-                Position = model.Position,
-                Salary = model.Salary,
-            };
+      
 
-            _context.Employees.Add(employee);
+
+            _context.Employees.Add(model);
             _context.SaveChanges();
 
             return RedirectToAction("Home", "Home");

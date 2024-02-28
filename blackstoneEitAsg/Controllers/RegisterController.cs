@@ -14,25 +14,20 @@ namespace blackstoneEitAsg.Controllers
         }
 
         [HttpGet]
-        public IActionResult Signup()
+        public IActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Signup(Admin model)
+        public IActionResult Register(Admin model)
         {
-            var admin = new Admin
-            {
-                Username = model.Username,
-                Email = model.Email,
-                Password = model.Password,
-            };
+       
 
-            _context.Admins.Add(admin);
+            _context.Admins.Add(model);
             _context.SaveChanges();
 
-            return View("~/Views/Home/Index.cshtml");
+            return View("Login.cshtml");
         }
     }
 }

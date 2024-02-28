@@ -1,4 +1,4 @@
-namespace blackstoneEitAsg.Models
+﻿namespace blackstoneEitAsg.Models
 {
     public class ErrorViewModel
     {

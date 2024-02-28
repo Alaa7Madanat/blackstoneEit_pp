@@ -1,15 +1,15 @@
-﻿<!DOCTYPE html>
+﻿@* @using System.Security.Cryptography *@
+@{
+    ViewData["Title"] = "Home Page";
+    
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewData["Title"] - Sign Up</title>
-    <link rel=”stylesheet” href=”css/bootstrap.css”>
-    <link rel=”stylesheet” href=”css/bootstrap-responsive.css”>
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
+    <title>Login</title>
 
     <!------------------the Css code------------------>
     <style>
@@ -19,21 +19,21 @@
             font-family: 'popins',sans-serif;
         }
 
-        .Main {
+        .main {
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             width: 100%;
-            background-image: url('/img/BlackstoneMain.png');
+            background-image: url('/img/blackstonemain.png');
             background-position: center;
             background-size: cover;
         }
 
         .form-box {
             position: relative;
-            width: 450px;
-            height: 550px;
+            width: 400px;
+            height: 450px;
             background: transparent;
             border: 2px solid rgb(255,255,255,0.5);
             border-radius: 20px;
@@ -55,7 +55,7 @@
         .inputbox {
             position: relative;
             margin: 30px 0;
-            width: 310;
+            width: 310px;
             border-bottom: 2px solid #fff;
         }
 
@@ -130,20 +130,20 @@
                 background-color: #CCE6FE;
             }
 
-        .Signin {
+        .register {
             font-size: .9em;
             color: #fff;
             text-align: center;
             margin: 25px 0 10px;
         }
 
-            .Signin a {
+            .register a {
                 text-decoration: none;
                 color: #fff;
                 font-weight: 600;
             }
 
-                .Signin a:hover {
+                .register a:hover {
                     text-decoration: underline;
                 }
         /* Chrome, Safari, Edge, Opera */
@@ -168,41 +168,44 @@
             font-size: 14px;
         }
     </style>
+
 </head>
-<!------------------the html code------------------>
+
 <body>
-    <div class="Main">
+
+    <div class="main">
         <div class="form-box">
             <div class="form-value">
-                <form class="Signup" method="post" action="/Register/Signup">
-                    <img src="~/img/Blackstonelogo.png" class="logo">
-                    <div class="inputbox">
-                        <ion-icon name="person-circle-outline"></ion-icon>
-                        <input type="text" name="username" id="name" required><label for=""> Admin Username</label>
-                    </div>
+                <img src="~/img/Blackstonelogo.png" class="logo">
 
-                    <div class="inputbox">
-                        <ion-icon name="mail-outline"></ion-icon>
-                        <input type="email" name="email" id="email" required> <label for="">Admin Email</label>
-                    </div>
+                 <form class="login" method="post" asp-controller="login" asp-action="Login">
+                <div class="inputbox">
+                    <ion-icon name="person-outline"></ion-icon>
+                    <input type="text" name="Username" id="Admin" required> <label for="">Admin Username</label>
+                </div>
+                <div class="inputbox">
+                    <ion-icon id="togglePassword" name="lock-closed-outline" onclick="Toggle()"></ion-icon>
+                    <input type="password" autocomplete="current-password" name="Password" id="pass_log_id" required> <label for="">Password</label>
+                    <i class="fa-solid fa-eye-slash" id="togglePassword"></i>
+                </div>
 
-                    <div class="inputbox">
-                        <ion-icon id="togglePassword" name="lock-closed-outline" onclick="Toggle()"></ion-icon>
-                        <input type="password" autocomplete="current-password" name="password" id="pass_log_id" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required> <label for="">Password</label>
-                        <i class="fa-solid fa-eye-slash" id="togglePassword"></i>
-                    </div>
-                    <button type="submit">Sign Up</button>
-                    <div class="Signin">
-                        Please press here to<a asp-controller="Home" asp-action="index" > login</a>
-                    </div>
+                     <button type="submit">Sign in</button>
+                     @if (ViewBag.WrongPassword != null)
+                     {
+                         <div>
+                             @ViewBag.WrongPassword
+                         </div>
+                     }
+                     <div class="register">
+                        Don't have a account <a asp-controller="Register" asp-action="Register">Register</a>
+                </div>
                 </form>
             </div>
         </div>
     </div>
     <!------------------the Javascript code------------------>
     <script>
-
-        // Change the type of input to password or text
+      
         function Toggle() {
             var temp = document.getElementById("pass_log_id");
             if (temp.type === "password") {
@@ -217,7 +220,7 @@
     </script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
+  
 </body>
-@RenderBody()
+
 </html>
