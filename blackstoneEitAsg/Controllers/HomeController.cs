@@ -27,7 +27,10 @@ namespace blackstoneEitAsg.Controllers
         public IActionResult Delete(int id)
         {
             var employee = _context.Employees.FirstOrDefault(x => x.Id == id);
-
+            if (employee == null)
+            {
+                return NotFound(); 
+            }
             _context.Employees.Remove(employee);
 
             _context.SaveChanges();

@@ -27,7 +27,7 @@ namespace blackstoneEitAsg.Controllers
             _context.Admins.Add(model);
             _context.SaveChanges();
 
-            return View("Login.cshtml");
+            return View();
         }
     }
 }

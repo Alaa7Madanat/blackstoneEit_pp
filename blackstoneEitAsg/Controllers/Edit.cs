@@ -34,7 +34,6 @@ namespace blackstoneEitAsg.Controllers
             employee.DateOfBirth = model.DateOfBirth;
             employee.Position = model.Position;
             employee.Salary = model.Salary;
-
             _context.SaveChanges();
             return RedirectToAction("Home", "Home");
         }
